@@ -19,4 +19,11 @@
           class="com.example.State">  <!--Тут он просит добавить аргумент-->
     </bean>
 
+    <bean id="StageBean"
+          class="com.example.Stage">  <!--Тут он просит добавить аргумент-->
+        <constructor-arg index="0" ref="name"/>
+        <constructor-arg index="1" ref="StateBean"/>
+
+    </bean>
+
 </beans>

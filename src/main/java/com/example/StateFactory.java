@@ -10,6 +10,7 @@ public class StateFactory {
         State result = states.get(name);
         if (result == null) {
             Rand rand = new Rand();
+
             result = new State(rand.generatePassword(passwordLength));
             states.put(name, result);
         }
