@@ -16,7 +16,7 @@ public class Lock {
     private ArrayList<Stage> stages = new ArrayList();
     private int stageNumber = 0;
 
-    public void lock() {
+    public void lock() {  // Задаются параметры пароля
 
         printer.print("Сколько стадий ввода пороля должно быть у замка?");
         this.stageNumber = in.nextInt();
@@ -26,9 +26,9 @@ public class Lock {
         int stateNumber = in.nextInt();
 
 
-        for (int i = 0; i < this.stageNumber; i++) {
+        for (int i = 0; i < this.stageNumber; i++) { // Генерирует пароль
             ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-            Rand rand = context.getBean("RandBean", Rand.class);
+            Rand rand = context.getBean("RandBean", Rand.class); // бин класса Rand
             printer.print("Введите название стадии " + (i + 1));
             String name = in.next();
             printer.print(rand.randomInt2String(1, stateNumber));
@@ -36,14 +36,14 @@ public class Lock {
 
             State state = StateFactory.getState(rand.randomInt2String(1, stateNumber), length);
 
-            Stage stage = context.getBean("StageBean", Stage.class);
+            Stage stage = context.getBean("StageBean", Stage.class); // бин класса Stage
             stage.setName(name);
             stage.setState(state);
             stages.add(i, stage);
         }
     }
 
-    public boolean unlock() {
+    public boolean unlock() { // Проверяет правильность пароля для каждой стадии
         for (int i = 0; i < this.stageNumber; i++) {
             Stage currentStage = stages.get(i);
             printer.print("Название стадии: " + currentStage.getName() + "\n");

@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class StateFactory {
+public class StateFactory { // Фабрика
 
     static Map<String, State> states = new HashMap<>();
 
@@ -16,7 +16,7 @@ public class StateFactory {
     }
 
 
-    public static State getState(String name, int passwordLength) {
+    public static State getState(String name, int passwordLength) { // Возвращает состояние с именем
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         State result = context.getBean("StateBean", State.class);
         result = states.get(name);

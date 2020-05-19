@@ -1,6 +1,6 @@
 package com.example;
 
-public class State {
+public class State { // хранит пароль
     public String password;
 
     public State() {
