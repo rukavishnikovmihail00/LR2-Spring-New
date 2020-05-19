@@ -16,14 +16,11 @@
     </bean>
 
     <bean id="StateBean"
-          class="com.example.State">  <!--Тут он просит добавить аргумент-->
+          class="com.example.State">
     </bean>
 
     <bean id="StageBean"
-          class="com.example.Stage">  <!--Тут он просит добавить аргумент-->
-        <constructor-arg index="0" ref="name"/>
-        <constructor-arg index="1" ref="StateBean"/>
-
+          class="com.example.Stage">
     </bean>
 
 </beans>

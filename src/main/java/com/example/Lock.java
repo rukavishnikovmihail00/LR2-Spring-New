@@ -34,11 +34,11 @@ public class Lock {
 
              //Я остановился тут.
             // Нужно проинициализировать бин класса state
-            State state = context.getBean("StateBean", State.class);
-            state = StateFactory.getState(rand.randomInt2String(1, stateNumber), length);
+            State state = StateFactory.getState(rand.randomInt2String(1, stateNumber), length);
 
             Stage stage = context.getBean("StageBean", Stage.class);
-            //stage = new Stage(name, state);
+            stage.setName(name);
+            stage.setState(state);
             stages.add(i, stage);
         }
     }

@@ -5,11 +5,15 @@ public class Stage {
     private String name;
     private State state;
 
-    Stage(String stageName, State state){
+    public Stage() {
+    }
 
-        this.name = stageName;
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public void setState(State state){
         this.state = state;
-
     }
 
     public String getPassword(){
