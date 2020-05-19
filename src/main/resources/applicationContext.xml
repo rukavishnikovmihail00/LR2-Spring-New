@@ -23,4 +23,8 @@
           class="com.example.Stage">
     </bean>
 
+    <bean id="PrinterBean"
+          class="com.example.Printer">
+    </bean>
+
 </beans>

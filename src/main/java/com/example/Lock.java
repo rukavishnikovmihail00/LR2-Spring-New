@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class Lock {
 
     private Printer printer = Printer.getInstance();
+
     private Scanner in = new Scanner(System.in);
     private ArrayList<Stage> stages = new ArrayList();
     private int stageNumber = 0;
@@ -32,8 +33,7 @@ public class Lock {
             String name = in.next();
             printer.print(rand.randomInt2String(1, stateNumber));
 
-             //Я остановился тут.
-            // Нужно проинициализировать бин класса state
+
             State state = StateFactory.getState(rand.randomInt2String(1, stateNumber), length);
 
             Stage stage = context.getBean("StageBean", Stage.class);

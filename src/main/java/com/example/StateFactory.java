@@ -17,10 +17,11 @@ public class StateFactory {
 
 
     public static State getState(String name, int passwordLength) {
-        State result = states.get(name);
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        State result = context.getBean("StateBean", State.class);
+        result = states.get(name);
         if (result == null) {
-            //Rand rand = new Rand();
-            result = new State(this.rand.generatePassword(passwordLength));
+            result = new State(Rand.generatePassword(passwordLength));
             states.put(name, result);
         }
         return result;
