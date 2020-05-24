@@ -1,3 +1,3 @@
-# SpringLR2
+# LR2-Spring-New
 
-It finally works!
+The new version of old LR. One more try
