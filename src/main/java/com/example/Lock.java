@@ -15,30 +15,30 @@ public class Lock {
     private ArrayList<Stage> stages = new ArrayList();
     private int stageNumber = 0;
 
-    public void lock() {
+    public void lock(ClassPathXmlApplicationContext context) {
 
         printer.print("Сколько стадий ввода пороля должно быть у замка?");
         this.stageNumber = in.nextInt();
         printer.print("Введите длину поролей");
         int length = in.nextInt();
         printer.print("Число вариаций пороля");
-        int stateNumber = in.nextInt();
+        int statesNumber = in.nextInt();
+
+        Rand rand = context.getBean("RandBean", Rand.class);
 
 
         for (int i = 0; i < this.stageNumber; i++) {
-            ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-            Rand rand = context.getBean("RandBean", Rand.class);
-            printer.print("Введите название стадии " + (i + 1));
-            String name = in.next();
-            printer.print(rand.randomInt2String(1, stateNumber));
-
-             //Я остановился тут.
-            // Нужно проинициализировать бин класса state
-            State state = context.getBean("StateBean", State.class);
-            state = StateFactory.getState(rand.randomInt2String(1, stateNumber), length);
 
             Stage stage = context.getBean("StageBean", Stage.class);
-            //stage = new Stage(name, state);
+
+            printer.print("Введите название стадии " + (i + 1));
+            String name = in.next();
+            stage.setName(name);
+
+            String stateName = rand.randomInt2String(1, statesNumber);
+            State state = StateFactory.getStates(stateName, length, rand, context);
+            stage.setState(state);
+
             stages.add(i, stage);
         }
     }

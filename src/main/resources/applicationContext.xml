@@ -4,26 +4,32 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="AppBean"
+          scope = "singleton"
           class="com.example.App">
     </bean>
 
     <bean id="LockBean"
+          scope = "singleton"
           class="com.example.Lock">
     </bean>
 
     <bean id="RandBean"
+          scope = "singleton"
           class="com.example.Rand">
     </bean>
 
     <bean id="StateBean"
+          scope = "prototype"
           class="com.example.State">
     </bean>
 
     <bean id="StageBean"
+          scope = "prototype"
           class="com.example.Stage">
     </bean>
 
     <bean id="PrinterBean"
+          scope = "singleton"
           class="com.example.Printer">
     </bean>
 

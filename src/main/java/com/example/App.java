@@ -6,12 +6,12 @@ public class App {
 
     private Printer printer = Printer.getInstance(); // Создается Синглтон
 
-    public void Start()
+
+    public void start(ClassPathXmlApplicationContext context)
     {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         Lock electronicLock = context.getBean("LockBean", Lock.class); // Создаем бин класса Lock
 
-        electronicLock.lock();
+        electronicLock.lock(context);
 
         while(!(electronicLock.unlock()))
             printer.print("Пороль неверный. Попробуйте еще ");

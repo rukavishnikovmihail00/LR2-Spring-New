@@ -1,20 +1,24 @@
 package com.example;
 
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class StateFactory {
-    static Map<String, State> states = new HashMap<>();
 
-    public static State getState(String name, int passwordLength) {
-        State result = states.get(name);
-        if (result == null) {
-            Rand rand = new Rand();
+    private static Map<String, State> states = new HashMap<>();
 
-            result = new State(rand.generatePassword(passwordLength));
-            states.put(name, result);
+    public static State getStates(String name, int passwordLength, Rand rand, ClassPathXmlApplicationContext context) {
+
+        State currentState = states.get(name);
+
+        if (currentState == null) {
+            currentState = context.getBean("StateBean", State.class);
+            currentState.setPassword(rand.generatePassword(passwordLength));
+            states.put(name, currentState);
         }
-        return result;
+        return currentState;
     }
 }
 

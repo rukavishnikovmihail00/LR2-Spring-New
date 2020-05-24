@@ -7,6 +7,6 @@ public class Main {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 
         App app = context.getBean("AppBean", App.class); // Создаем бин класса Арр
-        app.Start();
+        app.start(context);
     }
 }
