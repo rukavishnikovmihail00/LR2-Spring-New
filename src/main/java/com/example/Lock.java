@@ -11,12 +11,11 @@ import java.util.Scanner;
 public class Lock {
 
     private Printer printer = Printer.getInstance();
-
     private Scanner in = new Scanner(System.in);
     private ArrayList<Stage> stages = new ArrayList();
     private int stageNumber = 0;
 
-    public void lock() {  // Задаются параметры пароля
+    public void lock() {
 
         printer.print("Сколько стадий ввода пороля должно быть у замка?");
         this.stageNumber = in.nextInt();
@@ -26,24 +25,25 @@ public class Lock {
         int stateNumber = in.nextInt();
 
 
-        for (int i = 0; i < this.stageNumber; i++) { // Генерирует пароль
+        for (int i = 0; i < this.stageNumber; i++) {
             ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-            Rand rand = context.getBean("RandBean", Rand.class); // бин класса Rand
+            Rand rand = context.getBean("RandBean", Rand.class);
             printer.print("Введите название стадии " + (i + 1));
             String name = in.next();
             printer.print(rand.randomInt2String(1, stateNumber));
 
+             //Я остановился тут.
+            // Нужно проинициализировать бин класса state
+            State state = context.getBean("StateBean", State.class);
+            state = StateFactory.getState(rand.randomInt2String(1, stateNumber), length);
 
-            State state = StateFactory.getState(rand.randomInt2String(1, stateNumber), length);
-
-            Stage stage = context.getBean("StageBean", Stage.class); // бин класса Stage
-            stage.setName(name);
-            stage.setState(state);
+            Stage stage = context.getBean("StageBean", Stage.class);
+            //stage = new Stage(name, state);
             stages.add(i, stage);
         }
     }
 
-    public boolean unlock() { // Проверяет правильность пароля для каждой стадии
+    public boolean unlock() {
         for (int i = 0; i < this.stageNumber; i++) {
             Stage currentStage = stages.get(i);
             printer.print("Название стадии: " + currentStage.getName() + "\n");
